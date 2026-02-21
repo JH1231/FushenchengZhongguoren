@@ -141,10 +141,15 @@ const HSK2 = [{"hanzi": "吧", "pinyin": "ba", "meaning": "문장 끝에 쓰여,
 let audioEl=null;
 function speakWord(text){
   const w=text||cW[cIdx].hanzi;
-  if(audioEl){audioEl.pause();audioEl=null;}
-  audioEl=new Audio('https://translate.google.com/translate_tts?ie=UTF-8&client=tw-ob&tl=zh-CN&q='+encodeURIComponent(w));
-  audioEl.playbackRate=1.5;
-  audioEl.play().catch(()=>{});
+  window.speechSynthesis.cancel();
+  const u=new SpeechSynthesisUtterance(w);
+  u.lang='zh-CN';
+  u.rate=1.0;
+  u.pitch=1.0;
+  const voices=window.speechSynthesis.getVoices();
+  const zhVoice=voices.find(v=>v.lang==='zh-CN'||v.lang==='zh_CN'||v.lang.startsWith('zh'));
+  if(zhVoice)u.voice=zhVoice;
+  window.speechSynthesis.speak(u);
 }
 
 // === STUDY LOG ===
