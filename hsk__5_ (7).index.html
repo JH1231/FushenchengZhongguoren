@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HSK 단어장</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Noto+Sans+SC:wght@300;400;500;700;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+:root{--bg0:#0C0C0E;--bg1:#121215;--bg2:#18181D;--bg3:#1E1E24;--bg4:#222229;--bd:#282832;--bd2:#353542;--t1:#EDEDF0;--t2:#9898A8;--t3:#606075;--ac:#FB5C7A;--acd:rgba(251,92,122,.12);--gr:#34D399;--grd:rgba(52,211,153,.12);--yl:#FBBF24;--or:#FB923C;--rd:#FB5C7A;--rdd:rgba(251,92,122,.12);}
+body{font-family:'Outfit',sans-serif;background:var(--bg0);color:var(--t1);min-height:100vh;overflow-x:hidden;}
+body::before{content:'';position:fixed;top:-50%;left:-50%;width:200%;height:200%;background:radial-gradient(ellipse at 30% 20%,rgba(251,92,122,.04) 0%,transparent 50%),radial-gradient(ellipse at 70% 80%,rgba(52,211,153,.03) 0%,transparent 50%);pointer-events:none;z-index:0;}
+::-webkit-scrollbar{width:5px;}::-webkit-scrollbar-track{background:transparent;}::-webkit-scrollbar-thumb{background:var(--bd);border-radius:3px;}
+.wrap{position:relative;z-index:1;max-width:900px;margin:0 auto;padding:20px;}
+@keyframes fu{from{opacity:0;transform:translateY(8px);}to{opacity:1;transform:translateY(0);}}
+.hdr{text-align:center;padding:24px 20px 8px;}
+.hdr h1{font-size:32px;font-weight:900;letter-spacing:-1.5px;background:linear-gradient(135deg,var(--t1) 0%,var(--t2) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
+.hdr p{font-size:12px;color:var(--t3);margin-top:4px;}
+.nav-tabs{display:flex;justify-content:center;gap:4px;margin:16px 0 20px;background:var(--bg2);border:1px solid var(--bd);border-radius:12px;padding:3px;max-width:300px;margin-left:auto;margin-right:auto;}
+.nav-tab{flex:1;padding:8px 16px;border-radius:9px;font-size:12px;font-weight:600;cursor:pointer;color:var(--t3);text-align:center;transition:all .15s;}.nav-tab:hover{color:var(--t2);}.nav-tab.on{background:var(--ac);color:#fff;}
+#homeView .levels{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:8px;}.lv-card-full{grid-column:1/-1;}
+.lv-card{background:var(--bg2);border:1px solid var(--bd);border-radius:20px;padding:36px 28px;cursor:pointer;transition:all .25s;position:relative;overflow:hidden;}
+.lv-card::after{content:'';position:absolute;top:-1px;left:-1px;right:-1px;bottom:-1px;border-radius:20px;border:1px solid transparent;transition:border-color .3s;pointer-events:none;}.lv-card:hover::after{border-color:var(--ac);}
+.lv-card:hover{transform:translateY(-4px);box-shadow:0 16px 48px rgba(251,92,122,.08);}
+.lv-badge{display:inline-block;padding:4px 12px;background:var(--acd);border:1px solid rgba(251,92,122,.2);border-radius:6px;font-size:10px;font-weight:600;color:var(--ac);letter-spacing:.5px;text-transform:uppercase;margin-bottom:16px;}
+.lv-num{font-size:56px;font-weight:900;color:var(--t1);letter-spacing:-2px;line-height:1;}
+.lv-label{font-size:13px;color:var(--t3);margin-top:8px;}
+.lv-bar{display:flex;gap:3px;margin-top:16px;}.lv-pip{height:3px;flex:1;border-radius:2px;background:var(--bd);}
+.lv-card:first-child .lv-pip{background:var(--ac);opacity:.4;}
+.lv-card:nth-child(2) .lv-pip{background:var(--gr);opacity:.4;}.lv-card:last-child .lv-pip{background:var(--yl);opacity:.4;}
+.lv-arrow{position:absolute;bottom:28px;right:28px;width:36px;height:36px;background:var(--bg4);border:1px solid var(--bd);border-radius:10px;display:flex;align-items:center;justify-content:center;color:var(--t3);font-size:16px;transition:all .2s;}.lv-card:hover .lv-arrow{background:var(--ac);color:#fff;border-color:var(--ac);}
+#daysView{display:none;}
+.top-bar{display:flex;align-items:center;gap:12px;margin-bottom:28px;}
+.bk{width:36px;height:36px;background:var(--bg2);border:1px solid var(--bd);border-radius:10px;display:flex;align-items:center;justify-content:center;color:var(--t2);cursor:pointer;font-size:14px;flex-shrink:0;transition:all .15s;}.bk:hover{background:var(--bg3);color:var(--t1);}
+.pg-title{font-size:20px;font-weight:800;letter-spacing:-.5px;}.pg-sub{font-size:11px;color:var(--t3);}
+.days-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(155px,1fr));gap:10px;}
+.dy{background:var(--bg2);border:1px solid var(--bd);border-radius:14px;padding:20px;cursor:pointer;transition:all .2s;position:relative;overflow:hidden;}
+.dy:hover{border-color:var(--ac);transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,0,0,.15);}
+.dy-num{font-family:'JetBrains Mono',monospace;font-size:28px;font-weight:700;color:var(--ac);}
+.dy-label{font-size:11px;color:var(--t3);margin-top:2px;}
+.dy-range{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--t3);margin-top:8px;padding:3px 8px;background:var(--bg4);border-radius:5px;display:inline-block;}
+.dy-done{position:absolute;top:12px;right:12px;font-size:14px;cursor:pointer;transition:transform .15s;}.dy-done:hover{transform:scale(1.3);}
+#studyView{display:none;}
+.study-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:24px;flex-wrap:wrap;gap:12px;}
+.study-left{display:flex;align-items:center;gap:12px;}
+.study-title{font-size:16px;font-weight:700;}.study-cnt{font-size:11px;color:var(--t3);margin-top:1px;}
+.modes{display:flex;gap:4px;background:var(--bg2);border:1px solid var(--bd);border-radius:10px;padding:3px;}
+.md-btn{padding:7px 16px;border-radius:8px;font-size:11px;font-weight:600;cursor:pointer;color:var(--t3);transition:all .15s;}.md-btn:hover{color:var(--t2);}.md-btn.on{background:var(--ac);color:#fff;}
+.card-zone{display:flex;flex-direction:column;align-items:center;padding-top:12px;}
+.fc-wrap{perspective:1200px;width:100%;max-width:440px;height:340px;cursor:pointer;margin-bottom:28px;-webkit-tap-highlight-color:transparent;}
+.fc{width:100%;height:100%;position:relative;transform-style:preserve-3d;transition:transform .55s cubic-bezier(.4,.2,.2,1);border-radius:24px;}
+.fc.flip{transform:rotateY(180deg);}
+.face{position:absolute;top:0;left:0;width:100%;height:100%;backface-visibility:hidden;border-radius:24px;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:28px;}
+.f-front{background:#FFFFFF;box-shadow:0 8px 40px rgba(0,0,0,.25);}
+.f-back{background:#FFFFFF;transform:rotateY(180deg);box-shadow:0 8px 40px rgba(0,0,0,.25);}
+.f-idx{position:absolute;top:16px;right:20px;font-family:'JetBrains Mono',monospace;font-size:11px;color:#bbb;font-weight:600;}
+.f-pinyin{font-size:20px;color:var(--ac);font-weight:500;margin-bottom:14px;letter-spacing:.5px;}
+.f-hanzi{font-family:'Noto Sans SC',sans-serif;font-size:80px;font-weight:900;color:#1a1a1a;line-height:1;}
+.f-meaning{font-size:24px;font-weight:700;color:#1a1a1a;text-align:center;line-height:1.5;}
+.f-hint{position:absolute;bottom:18px;font-size:10px;color:#bbb;letter-spacing:.5px;}
+.f-dot{position:absolute;top:16px;left:20px;width:8px;height:8px;border-radius:50%;background:var(--ac);opacity:.6;}
+.f-dot-back{background:var(--gr);}
+.f-sound{position:absolute;top:14px;left:40px;width:28px;height:28px;border-radius:8px;background:#f5f5f5;border:none;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:14px;transition:all .15s;color:#999;}.f-sound:hover{background:var(--acd);color:var(--ac);}
+.cnav{display:flex;gap:16px;align-items:center;}
+.nb{width:48px;height:48px;border-radius:14px;border:1px solid var(--bd);background:var(--bg2);display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:18px;color:var(--t2);transition:all .15s;}.nb:hover{background:var(--ac);color:#fff;border-color:var(--ac);}.nb:disabled{opacity:.2;cursor:default;}.nb:disabled:hover{background:var(--bg2);color:var(--t2);border-color:var(--bd);}
+.cprog{font-family:'JetBrains Mono',monospace;font-size:14px;font-weight:600;color:var(--t2);min-width:64px;text-align:center;}
+.pips{display:flex;gap:4px;margin-top:20px;}.pip{width:100%;max-width:28px;height:3px;border-radius:2px;background:var(--bd);transition:background .2s;}.pip.on{background:var(--ac);}
+.wlist{display:none;width:100%;max-width:600px;margin:0 auto;}
+.wi{display:flex;align-items:center;gap:16px;padding:16px 18px;background:var(--bg2);border:1px solid var(--bd);border-radius:14px;margin-bottom:8px;cursor:pointer;transition:all .15s;}.wi:hover{border-color:var(--ac);background:var(--bg3);}
+.wi-idx{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--t3);font-weight:600;width:20px;text-align:center;flex-shrink:0;}
+.wi-hz{font-family:'Noto Sans SC',sans-serif;font-size:22px;font-weight:700;color:var(--t1);}
+.wi-py{font-size:12px;color:var(--ac);margin-top:1px;}
+.wi-mn{font-size:12px;color:var(--t3);margin-left:auto;text-align:right;max-width:260px;}
+.wi-spk{width:28px;height:28px;border-radius:8px;background:var(--bg4);border:1px solid var(--bd);display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:13px;flex-shrink:0;color:var(--t3);}.wi-spk:hover{background:var(--acd);color:var(--ac);}
+#calView{display:none;}
+.cal-wrap{max-width:580px;margin:0 auto;}
+.cal-nav{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;}
+.cal-month{font-size:20px;font-weight:800;}
+.cal-btn{width:36px;height:36px;background:var(--bg2);border:1px solid var(--bd);border-radius:10px;display:flex;align-items:center;justify-content:center;cursor:pointer;color:var(--t2);font-size:16px;transition:all .15s;}.cal-btn:hover{color:var(--t1);background:var(--bg3);}
+.cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:8px;}
+.cal-hdr{font-size:11px;color:var(--t3);text-align:center;font-weight:600;padding-bottom:10px;}
+.cal-day{aspect-ratio:1;border-radius:14px;display:flex;flex-direction:column;align-items:center;justify-content:center;font-size:15px;font-weight:600;color:var(--t3);background:var(--bg2);border:1px solid transparent;transition:all .15s;cursor:default;}
+.cal-day.today{border-color:var(--ac);color:var(--t1);box-shadow:0 0 12px rgba(251,92,122,.15);}
+.cal-day.done{background:var(--grd);color:var(--gr);border-color:rgba(52,211,153,.25);cursor:pointer;}
+.cal-day.done:hover{background:rgba(52,211,153,.18);}
+.cal-day.missed{background:var(--rdd);color:var(--rd);border-color:rgba(251,92,122,.2);}
+.cal-day.empty{background:transparent;border:none;}
+.cal-day.future{background:var(--bg2);color:var(--t3);}
+.cal-legend{display:flex;gap:20px;justify-content:center;margin-top:20px;font-size:11px;color:var(--t3);}
+.cal-lg{display:flex;align-items:center;gap:5px;}
+.cal-lg-dot{width:10px;height:10px;border-radius:4px;}
+.cal-detail{margin-top:16px;background:var(--bg2);border:1px solid var(--bd);border-radius:14px;padding:16px;display:none;}
+.cal-det-title{display:none;}
+.cal-det-tags{display:flex;flex-wrap:wrap;gap:6px;}
+.cal-det-tag{padding:8px 20px;background:var(--grd);border:1px solid rgba(52,211,153,.2);border-radius:10px;font-size:16px;font-weight:700;color:var(--gr);}
+/* REVIEW SECTION */
+.review-section{margin-top:28px;}.review-title{font-size:15px;font-weight:700;margin-bottom:12px;display:flex;align-items:center;gap:8px;}
+.review-title span{font-size:18px;}
+.rv-list{display:flex;flex-direction:column;gap:8px;}
+.rv-item{display:flex;align-items:center;justify-content:space-between;padding:12px 16px;background:var(--bg2);border:1px solid var(--bd);border-radius:12px;transition:all .15s;}
+.rv-item:hover{border-color:var(--ac);}
+.rv-left{display:flex;align-items:center;gap:10px;}
+.rv-when{font-size:11px;color:var(--t3);font-weight:500;min-width:60px;}
+.rv-tags{display:flex;flex-wrap:wrap;gap:4px;}
+.rv-tag{padding:3px 10px;background:var(--acd);border-radius:6px;font-size:11px;font-weight:600;color:var(--ac);cursor:pointer;transition:all .15s;}.rv-tag:hover{background:rgba(251,92,122,.2);}
+.rv-empty{font-size:12px;color:var(--t3);padding:8px 0;}
+/* MONKEY */
+.monkey-zone{margin-top:32px;text-align:center;padding:20px;}.monkey-emoji{font-size:48px;line-height:1;margin-bottom:8px;}.monkey-speech{position:relative;display:inline-block;background:var(--bg2);border:1px solid var(--bd);border-radius:14px;padding:10px 20px;font-size:13px;font-weight:600;color:var(--t2);}.monkey-speech::after{content:'';position:absolute;top:-8px;left:50%;transform:translateX(-50%);width:0;height:0;border-left:8px solid transparent;border-right:8px solid transparent;border-bottom:8px solid var(--bd);}
+@media(max-width:500px){.levels{grid-template-columns:1fr!important;}.lv-num{font-size:42px;}.fc-wrap{height:290px;}.f-hanzi{font-size:60px;}.f-meaning{font-size:20px;}.days-grid{grid-template-columns:repeat(3,1fr);}.hdr h1{font-size:28px;}.cal-grid{gap:5px;}.cal-day{font-size:13px;border-radius:10px;}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<div class="hdr"><h1>HSK 단어장</h1><p>매일 10개씩, 30일 완성</p></div>
+<div class="nav-tabs"><div class="nav-tab on" onclick="switchTab('study')">단어장</div><div class="nav-tab" onclick="switchTab('cal')">달력</div></div>
+<div id="homeView"><div class="levels">
+<div class="lv-card" onclick="showDays(1)"><div class="lv-badge">Level 1 · 기초</div><div class="lv-num">1급</div><div class="lv-label">150 단어 · Day 1~15</div><div class="lv-bar"><div class="lv-pip"></div><div class="lv-pip"></div><div class="lv-pip"></div><div class="lv-pip"></div><div class="lv-pip"></div><div class="lv-pip"></div><div class="lv-pip"></div><div class="lv-pip"></div><div class="lv-pip"></div><div class="lv-pip"></div><div class="lv-pip"></div><div class="lv-pip"></div><div class="lv-pip"></div><div class="lv-pip"></div><div class="lv-pip"></div></div><div class="lv-arrow">→</div></div>
+<div class="lv-card" onclick="showDays(2)"><div class="lv-badge" style="background:rgba(52,211,153,.12);border-color:rgba(52,211,153,.2);color:var(--gr);">Level 2 · 초급</div><div class="lv-num">2급</div><div class="lv-label">150 단어 · Day 1~15</div><div class="lv-bar"><div class="lv-pip"></div><div class="lv-pip"></div><div class="lv-pip"></div><div class="lv-pip"></div><div class="lv-pip"></div><div class="lv-pip"></div><div class="lv-pip"></div><div class="lv-pip"></div><div class="lv-pip"></div><div class="lv-pip"></div><div class="lv-pip"></div><div class="lv-pip"></div><div class="lv-pip"></div><div class="lv-pip"></div><div class="lv-pip"></div></div><div class="lv-arrow">→</div></div>
+<div class="lv-card lv-card-full" onclick="showDays(3)"><div class="lv-badge" style="background:rgba(251,191,36,.12);border-color:rgba(251,191,36,.2);color:var(--yl);">Level 3 · 중급</div><div class="lv-num">3급</div><div class="lv-label">310 단어 · Day 1~21</div><div class="lv-bar"><div class="lv-pip"></div><div class="lv-pip"></div><div class="lv-pip"></div><div class="lv-pip"></div><div class="lv-pip"></div><div class="lv-pip"></div><div class="lv-pip"></div><div class="lv-pip"></div><div class="lv-pip"></div><div class="lv-pip"></div><div class="lv-pip"></div><div class="lv-pip"></div><div class="lv-pip"></div><div class="lv-pip"></div><div class="lv-pip"></div><div class="lv-pip"></div><div class="lv-pip"></div><div class="lv-pip"></div><div class="lv-pip"></div><div class="lv-pip"></div><div class="lv-pip"></div></div><div class="lv-arrow">→</div></div>
+</div></div>
+<div id="daysView"><div class="top-bar"><div class="bk" onclick="goHome()">←</div><div><div class="pg-title" id="dTitle"></div><div class="pg-sub" id="dSub"></div></div></div><div class="days-grid" id="dGrid"></div></div>
+<div id="studyView"><div class="study-top"><div class="study-left"><div class="bk" onclick="backDays()">←</div><div><div class="study-title" id="sTitle"></div><div class="study-cnt" id="sCnt"></div></div></div><div class="modes"><div class="md-btn on" onclick="setMode('card',this)">카드</div><div class="md-btn" onclick="setMode('list',this)">목록</div></div></div>
+<div class="card-zone" id="cardZone"><div class="fc-wrap" onclick="flipCard()"><div class="fc" id="fc"><div class="face f-front"><div class="f-dot"></div><button class="f-sound" onclick="event.stopPropagation();speakWord()">🔊</button><div class="f-idx" id="fIdx"></div><div class="f-pinyin" id="fPy"></div><div class="f-hanzi" id="fHz"></div><div class="f-hint">탭하여 뜻 보기</div></div><div class="face f-back"><div class="f-dot f-dot-back"></div><button class="f-sound" onclick="event.stopPropagation();speakWord()" style="background:#e8faf0;">🔊</button><div class="f-idx" id="fIdx2"></div><div class="f-meaning" id="fMn"></div><div class="f-hint">탭하여 한자 보기</div></div></div></div>
+<div class="cnav"><button class="nb" id="pBtn" onclick="prev()">‹</button><div class="cprog" id="cProg"></div><button class="nb" id="nBtn" onclick="nxt()">›</button></div><div class="pips" id="pips"></div></div>
+<div class="wlist" id="wList"></div></div>
+<div id="calView"><div class="cal-wrap">
+<div class="cal-nav"><div class="cal-btn" onclick="calPrev()">‹</div><div class="cal-month" id="calMonth"></div><div class="cal-btn" onclick="calNext()">›</div></div>
+<div class="cal-grid" id="calGrid"></div>
+<div class="cal-legend"><div class="cal-lg"><div class="cal-lg-dot" style="background:var(--gr);"></div>학습 완료</div><div class="cal-lg"><div class="cal-lg-dot" style="background:var(--rd);"></div>미학습</div><div class="cal-lg"><div class="cal-lg-dot" style="background:var(--bd);"></div>미래</div></div>
+<div class="cal-detail" id="calDetail"><div class="cal-det-title" id="calDetTitle"></div><div class="cal-det-tags" id="calDetBody"></div></div>
+<div class="review-section"><div class="review-title"><span>🔄</span> 복습할 단어장</div><div class="rv-list" id="rvList"></div></div>
+<div class="monkey-zone"><div class="monkey-emoji">🐵</div><div class="monkey-speech">양심이 있으면 하셈</div></div>
+</div></div>
+</div>
+<script>
+const HSK1 = [{"hanzi": "爱", "pinyin": "ài", "meaning": "사랑하다, 좋아하다"}, {"hanzi": "八", "pinyin": "bā", "meaning": "8"}, {"hanzi": "爸爸", "pinyin": "bàba", "meaning": "아빠"}, {"hanzi": "杯子", "pinyin": "bēizi", "meaning": "컵"}, {"hanzi": "北京", "pinyin": "Běijīng", "meaning": "베이징"}, {"hanzi": "本", "pinyin": "běn", "meaning": "권(책을 세는 단위)"}, {"hanzi": "不", "pinyin": "bù", "meaning": "(동사, 형용사, 부사 앞에서 부정을 나타냄)"}, {"hanzi": "不客气", "pinyin": "bú kèqi", "meaning": "천만에요, 별말씀을요"}, {"hanzi": "菜", "pinyin": "cài", "meaning": "요리, 음식"}, {"hanzi": "茶", "pinyin": "chá", "meaning": "차"}, {"hanzi": "吃", "pinyin": "chī", "meaning": "먹다"}, {"hanzi": "出租车", "pinyin": "chūzūchē", "meaning": "택시"}, {"hanzi": "打电话", "pinyin": "dǎ diànhuà", "meaning": "전화를 걸다"}, {"hanzi": "大", "pinyin": "dà", "meaning": "크다, 넓다"}, {"hanzi": "的", "pinyin": "de", "meaning": "~한, ~의"}, {"hanzi": "点", "pinyin": "diǎn", "meaning": "시(시간의 단위)"}, {"hanzi": "电脑", "pinyin": "diànnǎo", "meaning": "컴퓨터"}, {"hanzi": "电视", "pinyin": "diànshì", "meaning": "텔레비전"}, {"hanzi": "电影", "pinyin": "diànyǐng", "meaning": "영화"}, {"hanzi": "东西", "pinyin": "dōngxi", "meaning": "물건"}, {"hanzi": "都", "pinyin": "dōu", "meaning": "모두"}, {"hanzi": "读", "pinyin": "dú", "meaning": "읽다"}, {"hanzi": "对不起", "pinyin": "duìbuqǐ", "meaning": "미안합니다"}, {"hanzi": "多", "pinyin": "duō", "meaning": "많다, 얼마나"}, {"hanzi": "多少", "pinyin": "duōshao", "meaning": "얼마, 몇"}, {"hanzi": "儿子", "pinyin": "érzi", "meaning": "아들"}, {"hanzi": "二", "pinyin": "èr", "meaning": "2"}, {"hanzi": "饭店", "pinyin": "fàndiàn", "meaning": "식당"}, {"hanzi": "飞机", "pinyin": "fēijī", "meaning": "비행기"}, {"hanzi": "分钟", "pinyin": "fēnzhōng", "meaning": "분(시간의 양을 세는 단위)"}, {"hanzi": "高兴", "pinyin": "gāoxìng", "meaning": "기쁘다, 즐겁다"}, {"hanzi": "个", "pinyin": "gè", "meaning": "개, 명(사람이나 물건을 세는 단위)"}, {"hanzi": "工作", "pinyin": "gōngzuò", "meaning": "일하다, 직업"}, {"hanzi": "狗", "pinyin": "gǒu", "meaning": "개(=Dog)"}, {"hanzi": "汉语", "pinyin": "Hànyǔ", "meaning": "중국어"}, {"hanzi": "好", "pinyin": "hǎo", "meaning": "좋다"}, {"hanzi": "号", "pinyin": "hào", "meaning": "번(차례, 순서)"}, {"hanzi": "喝", "pinyin": "hē", "meaning": "마시다"}, {"hanzi": "和", "pinyin": "hé", "meaning": "~와(과)"}, {"hanzi": "很", "pinyin": "hěn", "meaning": "매우, 대단히"}, {"hanzi": "后面", "pinyin": "hòumiàn", "meaning": "뒤, 뒤쪽"}, {"hanzi": "回", "pinyin": "huí", "meaning": "돌아가다"}, {"hanzi": "会", "pinyin": "huì", "meaning": "할 수 있다."}, {"hanzi": "几", "pinyin": "jǐ", "meaning": "몇"}, {"hanzi": "家", "pinyin": "jiā", "meaning": "집"}, {"hanzi": "叫", "pinyin": "jiào", "meaning": "외치다, 부르다"}, {"hanzi": "今天", "pinyin": "jīntiān", "meaning": "오늘"}, {"hanzi": "九", "pinyin": "jiǔ", "meaning": "9"}, {"hanzi": "开", "pinyin": "kāi", "meaning": "열다, 켜다"}, {"hanzi": "看", "pinyin": "kàn", "meaning": "보다"}, {"hanzi": "看见", "pinyin": "kànjiàn", "meaning": "보이다"}, {"hanzi": "块", "pinyin": "kuài", "meaning": "덩이, 조각"}, {"hanzi": "来", "pinyin": "lái", "meaning": "오다"}, {"hanzi": "老师", "pinyin": "lǎoshī", "meaning": "선생님"}, {"hanzi": "了", "pinyin": "le", "meaning": "(과거형 표현)"}, {"hanzi": "冷", "pinyin": "lěng", "meaning": "춥다"}, {"hanzi": "里", "pinyin": "lǐ", "meaning": "안쪽, 가운데"}, {"hanzi": "六", "pinyin": "liù", "meaning": "6"}, {"hanzi": "妈妈", "pinyin": "māma", "meaning": "엄마"}, {"hanzi": "吗", "pinyin": "ma", "meaning": "(의문문 표현)"}, {"hanzi": "买", "pinyin": "mǎi", "meaning": "사다, 구매하다"}, {"hanzi": "猫", "pinyin": "māo", "meaning": "고양이"}, {"hanzi": "没关系", "pinyin": "méi guānxi", "meaning": "괜찮다"}, {"hanzi": "没有", "pinyin": "méiyǒu", "meaning": "~않다"}, {"hanzi": "米饭", "pinyin": "mǐfàn", "meaning": "쌀밥"}, {"hanzi": "名字", "pinyin": "míngzi", "meaning": "이름"}, {"hanzi": "明天", "pinyin": "míngtiān", "meaning": "내일"}, {"hanzi": "哪", "pinyin": "nǎ", "meaning": "어느"}, {"hanzi": "哪儿", "pinyin": "nǎr", "meaning": "어디, 어느 곳"}, {"hanzi": "那", "pinyin": "nà", "meaning": "그(것), 저(것)"}, {"hanzi": "呢", "pinyin": "ne", "meaning": "(문장 끝에 쓰여 동작이나 상황의 지속을 나타냄)"}, {"hanzi": "能", "pinyin": "néng", "meaning": "~할 수 있다"}, {"hanzi": "你", "pinyin": "nǐ", "meaning": "너, 당신"}, {"hanzi": "年", "pinyin": "nián", "meaning": "년, 해"}, {"hanzi": "女儿", "pinyin": "nǚ'ér", "meaning": "딸"}, {"hanzi": "朋友", "pinyin": "péngyou", "meaning": "친구"}, {"hanzi": "漂亮", "pinyin": "piàoliang", "meaning": "예쁘다, 아름답다"}, {"hanzi": "苹果", "pinyin": "píngguǒ", "meaning": "사과"}, {"hanzi": "七", "pinyin": "qī", "meaning": "7"}, {"hanzi": "前面", "pinyin": "qiánmiàn", "meaning": "앞쪽"}, {"hanzi": "钱", "pinyin": "qián", "meaning": "돈"}, {"hanzi": "请", "pinyin": "qǐng", "meaning": "청하다"}, {"hanzi": "去", "pinyin": "qù", "meaning": "가다"}, {"hanzi": "热", "pinyin": "rè", "meaning": "덥다, 뜨겁다"}, {"hanzi": "人", "pinyin": "rén", "meaning": "사람"}, {"hanzi": "认识", "pinyin": "rènshi", "meaning": "알다, 인식하다"}, {"hanzi": "三", "pinyin": "sān", "meaning": "3"}, {"hanzi": "商店", "pinyin": "shāngdiàn", "meaning": "상점"}, {"hanzi": "上", "pinyin": "shàng", "meaning": "위"}, {"hanzi": "上午", "pinyin": "shàngwǔ", "meaning": "오전"}, {"hanzi": "少", "pinyin": "shǎo", "meaning": "적다"}, {"hanzi": "谁", "pinyin": "shéi", "meaning": "누구"}, {"hanzi": "什么", "pinyin": "shénme", "meaning": "무슨, 무엇"}, {"hanzi": "十", "pinyin": "shí", "meaning": "10"}, {"hanzi": "时候", "pinyin": "shíhou", "meaning": "때, 무렵"}, {"hanzi": "是", "pinyin": "shì", "meaning": "~이다"}, {"hanzi": "书", "pinyin": "shū", "meaning": "책"}, {"hanzi": "水", "pinyin": "shuǐ", "meaning": "물"}, {"hanzi": "水果", "pinyin": "shuǐguǒ", "meaning": "과일"}, {"hanzi": "睡觉", "pinyin": "shuìjiào", "meaning": "(잠을) 자다"}, {"hanzi": "说", "pinyin": "shuō", "meaning": "말하다"}, {"hanzi": "四", "pinyin": "sì", "meaning": "4"}, {"hanzi": "岁", "pinyin": "suì", "meaning": "살, 세(나이 단위)"}, {"hanzi": "他", "pinyin": "tā", "meaning": "그(남자)"}, {"hanzi": "她", "pinyin": "tā", "meaning": "그(여자)"}, {"hanzi": "太", "pinyin": "tài", "meaning": "대단히, 너무"}, {"hanzi": "天气", "pinyin": "tiānqì", "meaning": "날씨"}, {"hanzi": "听", "pinyin": "tīng", "meaning": "듣다"}, {"hanzi": "同学", "pinyin": "tóngxué", "meaning": "학우"}, {"hanzi": "喂", "pinyin": "wèi", "meaning": "이봐, 여보세요"}, {"hanzi": "我", "pinyin": "wǒ", "meaning": "나, 저"}, {"hanzi": "我们", "pinyin": "wǒmen", "meaning": "우리(들)"}, {"hanzi": "五", "pinyin": "wǔ", "meaning": "5"}, {"hanzi": "喜欢", "pinyin": "xǐhuan", "meaning": "좋아하다"}, {"hanzi": "下", "pinyin": "xià", "meaning": "밑, 아래"}, {"hanzi": "下午", "pinyin": "xiàwǔ", "meaning": "오후"}, {"hanzi": "下雨", "pinyin": "xià yǔ", "meaning": "비가내리다"}, {"hanzi": "先生", "pinyin": "xiānsheng", "meaning": "선생님, 씨(성인 남성에 대한 경칭)"}, {"hanzi": "现在", "pinyin": "xiànzài", "meaning": "지금, 현재"}, {"hanzi": "想", "pinyin": "xiǎng", "meaning": "~하고 싶다, ~하려고 하다"}, {"hanzi": "小", "pinyin": "xiǎo", "meaning": "작다"}, {"hanzi": "小姐", "pinyin": "xiǎojiě", "meaning": "아가씨, 젊은 여자"}, {"hanzi": "些", "pinyin": "xiē", "meaning": "조금, 약간, 몇"}, {"hanzi": "写", "pinyin": "xiě", "meaning": "글씨를 쓰다"}, {"hanzi": "谢谢", "pinyin": "xièxie", "meaning": "감사합니다."}, {"hanzi": "星期", "pinyin": "xīngqī", "meaning": "요일, 주"}, {"hanzi": "学生", "pinyin": "xuésheng", "meaning": "학생"}, {"hanzi": "学习", "pinyin": "xuéxí", "meaning": "공부하다, 배우다"}, {"hanzi": "学校", "pinyin": "xuéxiào", "meaning": "학교"}, {"hanzi": "一", "pinyin": "yī", "meaning": "1, 하나"}, {"hanzi": "一点儿", "pinyin": "yìdiǎnr", "meaning": "조금, 약간"}, {"hanzi": "衣服", "pinyin": "yīfu", "meaning": "옷, 의복"}, {"hanzi": "医生", "pinyin": "yīshēng", "meaning": "의사"}, {"hanzi": "医院", "pinyin": "yīyuàn", "meaning": "병원"}, {"hanzi": "椅子", "pinyin": "yǐzi", "meaning": "의자"}, {"hanzi": "有", "pinyin": "yǒu", "meaning": "있다. 소유하다"}, {"hanzi": "月", "pinyin": "yuè", "meaning": "월"}, {"hanzi": "再见", "pinyin": "zàijiàn", "meaning": "또 뵙겠습니다, 안녕히 계십시오"}, {"hanzi": "在", "pinyin": "zài", "meaning": "~에 있다, 존재하다, ~에(서)"}, {"hanzi": "怎么", "pinyin": "zěnme", "meaning": "어떻게, 어째서"}, {"hanzi": "怎么样", "pinyin": "zěnmeyàng", "meaning": "어떠하다"}, {"hanzi": "这", "pinyin": "zhè", "meaning": "이, 이것"}, {"hanzi": "中国", "pinyin": "Zhōngguó", "meaning": "중국"}, {"hanzi": "中午", "pinyin": "zhōngwǔ", "meaning": "정오"}, {"hanzi": "住", "pinyin": "zhù", "meaning": "살다, 거주하다"}, {"hanzi": "桌子", "pinyin": "zhuōzi", "meaning": "탁자, 테이블"}, {"hanzi": "字", "pinyin": "zì", "meaning": "글자, 문자"}, {"hanzi": "昨天", "pinyin": "zuótiān", "meaning": "어제"}, {"hanzi": "坐", "pinyin": "zuò", "meaning": "앉다, (교통 수단을) 타다"}, {"hanzi": "做", "pinyin": "zuò", "meaning": "하다, 만들다"}];
+const HSK3 = [{"hanzi": "饭馆", "pinyin": "fànguǎn", "meaning": "식당"}, {"hanzi": "没", "pinyin": "méi", "meaning": "없다 /(부)~않다"}, {"hanzi": "船", "pinyin": "chuán", "meaning": "배, 선박"}, {"hanzi": "但是", "pinyin": "dànshì", "meaning": "그러나, 그렇지만"}, {"hanzi": "公斤", "pinyin": "gōngjīn", "meaning": "킬로그램(kg)"}, {"hanzi": "欢迎", "pinyin": "huānyíng", "meaning": "환영하다"}, {"hanzi": "回答", "pinyin": "huídá", "meaning": "대답하다"}, {"hanzi": "男人", "pinyin": "nánrén", "meaning": "남자, 남성"}, {"hanzi": "女人", "pinyin": "nǚrén", "meaning": "여자, 여성"}, {"hanzi": "所以", "pinyin": "suǒyǐ", "meaning": "그래서"}, {"hanzi": "向", "pinyin": "xiàng", "meaning": "~을 향해서, ~로"}, {"hanzi": "因为", "pinyin": "yīnwèi", "meaning": "~때문에"}, {"hanzi": "元", "pinyin": "yuán", "meaning": "시작의, 으뜸의\n/(명)(화폐) 위안"}, {"hanzi": "张", "pinyin": "zhāng", "meaning": "얇고 평평한 것을 \n세는 단위"}, {"hanzi": "自行车", "pinyin": "zìxíngchē", "meaning": "자전거"}, {"hanzi": "啊", "pinyin": "a", "meaning": "긍정의미조사"}, {"hanzi": "矮", "pinyin": "ǎi", "meaning": "(키가) 작다"}, {"hanzi": "爱好", "pinyin": "àihào", "meaning": "취미 /(동)애호하다"}, {"hanzi": "安静", "pinyin": "ānjìng", "meaning": "조용하다"}, {"hanzi": "阿姨", "pinyin": "āyí", "meaning": "아주머니"}, {"hanzi": "把", "pinyin": "bǎ", "meaning": "~을, ~를"}, {"hanzi": "班", "pinyin": "bān", "meaning": "조, 그룹, 반"}, {"hanzi": "搬", "pinyin": "bān", "meaning": "운반하다, 이사하다"}, {"hanzi": "半", "pinyin": "bàn", "meaning": "절반, 2분의 1"}, {"hanzi": "办法", "pinyin": "bànfǎ", "meaning": "방법, 수단"}, {"hanzi": "帮忙", "pinyin": "bāngmáng", "meaning": "(일손을) 돕다"}, {"hanzi": "办公室", "pinyin": "bàngōngshì", "meaning": "사무실"}, {"hanzi": "包", "pinyin": "bāo", "meaning": "(종이나 천으로) 싸다\n/(명)가방"}, {"hanzi": "饱", "pinyin": "bǎo", "meaning": "배부르다"}, {"hanzi": "被", "pinyin": "bèi", "meaning": "~에게 ~을 당하다\n/(동)덮다"}, {"hanzi": "北方", "pinyin": "běifāng", "meaning": "북방, 북쪽"}, {"hanzi": "变化", "pinyin": "biànhuà", "meaning": "변화하다 /(명)변화"}, {"hanzi": "表示", "pinyin": "biǎoshì", "meaning": "나타내다, 의미하다"}, {"hanzi": "表演", "pinyin": "biǎoyǎn", "meaning": "공연하다, 연기하다"}, {"hanzi": "别人", "pinyin": "biéren", "meaning": "남, 타인"}, {"hanzi": "比较", "pinyin": "bǐjiào", "meaning": "비교하다 \n/(부)비교적"}, {"hanzi": "冰箱", "pinyin": "bīngxiāng", "meaning": "냉장고"}, {"hanzi": "比赛", "pinyin": "bǐsài", "meaning": "시합하다 /(명)시합"}, {"hanzi": "必须", "pinyin": "bìxū", "meaning": "반드시~해야 한다"}, {"hanzi": "鼻子", "pinyin": "bízi", "meaning": "코"}, {"hanzi": "才", "pinyin": "cái", "meaning": "겨우, ~에야 비로소"}, {"hanzi": "菜单", "pinyin": "càidān", "meaning": "식단, 메뉴"}, {"hanzi": "参加", "pinyin": "cānjiā", "meaning": "참가하다"}, {"hanzi": "草", "pinyin": "cǎo", "meaning": "(식물) 풀"}, {"hanzi": "层", "pinyin": "céng", "meaning": "층, 겹 /(명) 층"}, {"hanzi": "差", "pinyin": "chà", "meaning": "차이가 나다\n표준에 못 미치다"}, {"hanzi": "超市", "pinyin": "chāoshì", "meaning": "슈퍼마켓"}, {"hanzi": "成绩", "pinyin": "chéngjì", "meaning": "(일.학업) 성적"}, {"hanzi": "城市", "pinyin": "chāoshì", "meaning": "도시"}, {"hanzi": "衬衫", "pinyin": "chènshān", "meaning": "와이셔츠"}, {"hanzi": "迟到", "pinyin": "chídào", "meaning": "지각하다"}, {"hanzi": "厨房", "pinyin": "chúfáng", "meaning": "주방"}, {"hanzi": "除了", "pinyin": "chúle", "meaning": "~을 제외하고"}, {"hanzi": "春", "pinyin": "chūn", "meaning": "봄"}, {"hanzi": "出现", "pinyin": "chūxiàn", "meaning": "출현하다"}, {"hanzi": "词语", "pinyin": "cíyǔ", "meaning": "단어"}, {"hanzi": "聪明", "pinyin": "cōngming", "meaning": "똑똑하다, 총명하다"}, {"hanzi": "蛋糕", "pinyin": "dàngāo", "meaning": "케이크, 카스텔라"}, {"hanzi": "当然", "pinyin": "dāngrán", "meaning": "당연하다, 물론이다"}, {"hanzi": "担心", "pinyin": "dānxīn", "meaning": "걱정하다, 염려하다"}, {"hanzi": "带", "pinyin": "dài", "meaning": "지니다, 휴대하다\n/(명)벨트, 띠"}, {"hanzi": "打扫", "pinyin": "dǎsǎo", "meaning": "청소하다"}, {"hanzi": "打算", "pinyin": "dǎsuan", "meaning": "~할 계획이다"}, {"hanzi": "地", "pinyin": "de", "meaning": "부사어구조조사"}, {"hanzi": "灯", "pinyin": "dēng", "meaning": "등, 램프, 라이트"}, {"hanzi": "低", "pinyin": "dī", "meaning": "(높이가) 낮다"}, {"hanzi": "电梯", "pinyin": "diàntī", "meaning": "엘리베이터"}, {"hanzi": "电子邮件", "pinyin": "diànzǐyóujiàn", "meaning": "이메일"}, {"hanzi": "地方", "pinyin": "dìfang", "meaning": "곳, 장소"}, {"hanzi": "地铁", "pinyin": "dìtiě", "meaning": "지하철"}, {"hanzi": "地图", "pinyin": "dìtú", "meaning": "지도"}, {"hanzi": "东", "pinyin": "dōng", "meaning": "동쪽"}, {"hanzi": "冬", "pinyin": "dōng", "meaning": "겨울"}, {"hanzi": "动物", "pinyin": "dòngwù", "meaning": "동물"}, {"hanzi": "短", "pinyin": "duǎn", "meaning": "(공간.시간) 짧다"}, {"hanzi": "段", "pinyin": "duàn", "meaning": "단락, 토막"}, {"hanzi": "锻炼", "pinyin": "duànliàn", "meaning": "단련하다"}, {"hanzi": "多么", "pinyin": "duōme", "meaning": "얼마나"}, {"hanzi": "饿", "pinyin": "è", "meaning": "배고프다"}, {"hanzi": "耳朵", "pinyin": "ěrduo", "meaning": "귀"}, {"hanzi": "而且", "pinyin": "érqiě", "meaning": "게다가"}, {"hanzi": "放", "pinyin": "fàng", "meaning": "놓다, 놓아주다"}, {"hanzi": "方便", "pinyin": "fāngbiàn", "meaning": "편리하다"}, {"hanzi": "放心", "pinyin": "fàngxīn", "meaning": "안심하다"}, {"hanzi": "发烧", "pinyin": "fāshāo", "meaning": "열이 나다"}, {"hanzi": "发现", "pinyin": "fāxiàn", "meaning": "발견하다"}, {"hanzi": "分", "pinyin": "fēn", "meaning": "나누다"}, {"hanzi": "附近", "pinyin": "fùjìn", "meaning": "부근, 근처"}, {"hanzi": "复习", "pinyin": "fùxí", "meaning": "복습하다"}, {"hanzi": "敢", "pinyin": "gǎn", "meaning": "감히~하다"}, {"hanzi": "刚才", "pinyin": "gāngcái", "meaning": "방금, 아까"}, {"hanzi": "干净", "pinyin": "gānjìng", "meaning": "깨끗하다"}, {"hanzi": "感冒", "pinyin": "gǎnmào", "meaning": "감기에 걸리다\n/(명)감기"}, {"hanzi": "跟", "pinyin": "gēn", "meaning": "~와 /(동)따라가다"}, {"hanzi": "更", "pinyin": "gèng", "meaning": "더욱, 더"}, {"hanzi": "根据", "pinyin": "gēnjù", "meaning": "~에 근거하여"}, {"hanzi": "公园", "pinyin": "gōngyuán", "meaning": "공원"}, {"hanzi": "刮风", "pinyin": "guāfēng", "meaning": "바람이 불다"}, {"hanzi": "关", "pinyin": "guān", "meaning": "닫다, 끄다, 덮다"}, {"hanzi": "关系", "pinyin": "guānxi", "meaning": "관계"}, {"hanzi": "关心", "pinyin": "guānxīn", "meaning": "관심을 갖다"}, {"hanzi": "关于", "pinyin": "guānyú", "meaning": "~에 관하여"}, {"hanzi": "国家", "pinyin": "guójiā", "meaning": "국가, 나라"}, {"hanzi": "过去", "pinyin": "guòqù", "meaning": "과거 /(동)지나가다"}, {"hanzi": "果汁", "pinyin": "guǒzhī", "meaning": "과일즙"}, {"hanzi": "故事", "pinyin": "gùshi", "meaning": "이야기"}, {"hanzi": "害怕", "pinyin": "hàipà", "meaning": "무서워하다"}, {"hanzi": "还是", "pinyin": "háishi", "meaning": "여전히, 변함없이\n/(접)(의문문)아니면"}, {"hanzi": "河", "pinyin": "hé", "meaning": "강, 하천"}, {"hanzi": "黑板", "pinyin": "hēibǎn", "meaning": "칠판"}, {"hanzi": "花", "pinyin": "huā", "meaning": "쓰다, 소비하다\n/(명)(~儿）꽃"}, {"hanzi": "画", "pinyin": "huà", "meaning": "(그림을) 그리다"}, {"hanzi": "坏", "pinyin": "huài", "meaning": "나쁘다"}, {"hanzi": "换", "pinyin": "huàn", "meaning": "교환하다"}, {"hanzi": "黄", "pinyin": "huáng", "meaning": "노랗다"}, {"hanzi": "环境", "pinyin": "huánjìng", "meaning": "환경"}, {"hanzi": "花园", "pinyin": "huāyuán", "meaning": "화원"}, {"hanzi": "会议", "pinyin": "huìyì", "meaning": "회의"}, {"hanzi": "或者", "pinyin": "huòzhě", "meaning": "(평서문)아니면"}, {"hanzi": "护照", "pinyin": "hùzhào", "meaning": "여권"}, {"hanzi": "极", "pinyin": "jí", "meaning": "지극히 /(명)정점"}, {"hanzi": "检查", "pinyin": "jiǎnchá", "meaning": "검사하다"}, {"hanzi": "简单", "pinyin": "jiǎndān", "meaning": "간단하다"}, {"hanzi": "讲", "pinyin": "jiǎng", "meaning": "말하다, 이야기하다"}, {"hanzi": "健康", "pinyin": "jiànkāng", "meaning": "건강하다"}, {"hanzi": "见面", "pinyin": "jiànmiàn", "meaning": "만나다, 대면하다"}, {"hanzi": "教", "pinyin": "jiāo", "meaning": "가르치다"}, {"hanzi": "角", "pinyin": "jiǎo", "meaning": "모서리, 뿔, 각"}, {"hanzi": "脚", "pinyin": "jiǎo", "meaning": "발"}, {"hanzi": "记得", "pinyin": "jìde", "meaning": "기억하고 있다"}, {"hanzi": "接", "pinyin": "jiē", "meaning": "잇다, 연결하다"}, {"hanzi": "借", "pinyin": "jiè", "meaning": "빌리다"}, {"hanzi": "街道", "pinyin": "jiēdào", "meaning": "거리"}, {"hanzi": "结婚", "pinyin": "jiéhūn", "meaning": "결혼하다"}, {"hanzi": "解决", "pinyin": "jiějué", "meaning": "해결하다"}, {"hanzi": "节目", "pinyin": "jiémù", "meaning": "프로그램"}, {"hanzi": "节日", "pinyin": "jiérì", "meaning": "기념일, 경축일"}, {"hanzi": "结束", "pinyin": "jiéshù", "meaning": "끝나다, 마치다"}, {"hanzi": "几乎", "pinyin": "jīhū", "meaning": "거의"}, {"hanzi": "机会", "pinyin": "jīhuì", "meaning": "기회"}, {"hanzi": "季节", "pinyin": "jìjié", "meaning": "계절"}, {"hanzi": "经常", "pinyin": "jīngcháng", "meaning": "자주, 늘, 항상"}, {"hanzi": "经过", "pinyin": "jīngguò", "meaning": "겪다, 경유하다 \n/(명)과정, 경위"}, {"hanzi": "经理", "pinyin": "jīnglǐ", "meaning": "사장, 지배인"}, {"hanzi": "久", "pinyin": "jiǔ", "meaning": "오래되다"}, {"hanzi": "旧", "pinyin": "jiù", "meaning": "낡다, 오래되다"}, {"hanzi": "决定", "pinyin": "juédìng", "meaning": "결정하다"}, {"hanzi": "举行", "pinyin": "jǔxíng", "meaning": "거행하다"}, {"hanzi": "句子", "pinyin": "jùzi", "meaning": "문장"}, {"hanzi": "渴", "pinyin": "kě", "meaning": "목마르다"}, {"hanzi": "刻", "pinyin": "kè", "meaning": "새기다, 조각하다"}, {"hanzi": "可爱", "pinyin": "kě'ài", "meaning": "귀엽다"}, {"hanzi": "客人", "pinyin": "kèrén", "meaning": "손님"}, {"hanzi": "空调", "pinyin": "kōngtiáo", "meaning": "에어컨"}, {"hanzi": "口", "pinyin": "kǒu", "meaning": "입 /(양)식구"}, {"hanzi": "哭", "pinyin": "kū", "meaning": "(소리내어) 울다"}, {"hanzi": "筷子", "pinyin": "kuàizi", "meaning": "젓가락"}, {"hanzi": "裤子", "pinyin": "kùzi", "meaning": "바지"}, {"hanzi": "蓝", "pinyin": "lán", "meaning": "남색의, 남빛의"}, {"hanzi": "老", "pinyin": "lǎo", "meaning": "늙다, 오래되다"}, {"hanzi": "脸", "pinyin": "liǎn", "meaning": "얼굴"}, {"hanzi": "辆", "pinyin": "liàng", "meaning": "(차량) 대"}, {"hanzi": "练习", "pinyin": "liànxí", "meaning": "연습하다"}, {"hanzi": "了解", "pinyin": "liǎojiě", "meaning": "알다, 이해하다"}, {"hanzi": "离开", "pinyin": "líkāi", "meaning": "떠나다"}, {"hanzi": "邻居", "pinyin": "línjū", "meaning": "이웃"}, {"hanzi": "历史", "pinyin": "lìshǐ", "meaning": "역사"}, {"hanzi": "礼物", "pinyin": "lǐwù", "meaning": "선물"}, {"hanzi": "楼", "pinyin": "lóu", "meaning": "건물, 층"}, {"hanzi": "绿", "pinyin": "lǜ", "meaning": "푸르다"}, {"hanzi": "马", "pinyin": "mǎ", "meaning": "말하다, 이야기하다"}, {"hanzi": "满意", "pinyin": "mǎnyì", "meaning": "만족하다"}, {"hanzi": "帽子", "pinyin": "màozi", "meaning": "모자"}, {"hanzi": "马上", "pinyin": "mǎshàng", "meaning": "곧, 즉시, 바로"}, {"hanzi": "米", "pinyin": "mǐ", "meaning": "쌀"}, {"hanzi": "面包", "pinyin": "miànbāo", "meaning": "빵"}, {"hanzi": "面条", "pinyin": "miàntiáo", "meaning": "국수"}, {"hanzi": "明白", "pinyin": "míngbai", "meaning": "명백하다, 알다"}, {"hanzi": "拿", "pinyin": "ná", "meaning": "(손으로) 잡다, 쥐다"}, {"hanzi": "奶奶", "pinyin": "nǎinai", "meaning": "할머니"}, {"hanzi": "南", "pinyin": "nán", "meaning": "남쪽"}, {"hanzi": "难", "pinyin": "nán", "meaning": "어렵다, 힘들다"}, {"hanzi": "难过", "pinyin": "nánguò", "meaning": "괴롭다, 슬프다"}, {"hanzi": "年级", "pinyin": "niánjí", "meaning": "학년"}, {"hanzi": "年轻", "pinyin": "niánqīng", "meaning": "젊다"}, {"hanzi": "鸟", "pinyin": "niǎo", "meaning": "새"}, {"hanzi": "努力", "pinyin": "nǔlì", "meaning": "노력하다"}, {"hanzi": "胖", "pinyin": "pàng", "meaning": "뚱뚱하다, 살찌다"}, {"hanzi": "盘子", "pinyin": "pánzi", "meaning": "쟁반"}, {"hanzi": "爬山", "pinyin": "páshān", "meaning": "등산하다"}, {"hanzi": "啤酒", "pinyin": "píjiǔ", "meaning": "맥주"}, {"hanzi": "葡萄", "pinyin": "pútáo", "meaning": "포도"}, {"hanzi": "普通话", "pinyin": "pǔtōnghuà", "meaning": "중국 표준어"}, {"hanzi": "骑", "pinyin": "qí", "meaning": "(동물.자전거) 타다"}, {"hanzi": "奇怪", "pinyin": "qíguài", "meaning": "기이하다, 이상하다"}, {"hanzi": "清楚", "pinyin": "qīngchu", "meaning": "분명하다"}, {"hanzi": "其实", "pinyin": "qíshí", "meaning": "사실"}, {"hanzi": "其他", "pinyin": "qítā", "meaning": "기타"}, {"hanzi": "秋", "pinyin": "qiū", "meaning": "가을"}, {"hanzi": "裙子", "pinyin": "qúnzi", "meaning": "치마"}, {"hanzi": "然后", "pinyin": "ránhòu", "meaning": "연후에, 그런 후에"}, {"hanzi": "认为", "pinyin": "rènwéi", "meaning": "~라고 생각하다"}, {"hanzi": "认真", "pinyin": "rènzhēn", "meaning": "진지하다, 착실하다"}, {"hanzi": "热情", "pinyin": "rèqíng", "meaning": "열정적이다, 친절하다"}, {"hanzi": "容易", "pinyin": "róngyì", "meaning": "쉽다"}, {"hanzi": "如果", "pinyin": "rúguǒ", "meaning": "만약, 만일"}, {"hanzi": "伞", "pinyin": "sǎn", "meaning": "우산"}, {"hanzi": "上网", "pinyin": "shàngwǎng", "meaning": "인터넷을 하다"}, {"hanzi": "生气", "pinyin": "shēngqì", "meaning": "화내다, 성나다"}, {"hanzi": "声音", "pinyin": "shēngyīn", "meaning": "소리"}, {"hanzi": "使", "pinyin": "shǐ", "meaning": "~에게 ~시키다"}, {"hanzi": "世界", "pinyin": "shìjiè", "meaning": "세계"}, {"hanzi": "瘦", "pinyin": "shòu", "meaning": "마르다, 여위다"}, {"hanzi": "树", "pinyin": "shù", "meaning": "나무"}, {"hanzi": "双", "pinyin": "shuāng", "meaning": "짝, 쌍"}, {"hanzi": "刷牙", "pinyin": "shuāyá", "meaning": "이를 닦다"}, {"hanzi": "舒服", "pinyin": "shūfu", "meaning": "편안하다"}, {"hanzi": "水平", "pinyin": "shuǐpíng", "meaning": "수준"}, {"hanzi": "叔叔", "pinyin": "shūshu", "meaning": "숙부, 삼촌"}, {"hanzi": "数学", "pinyin": "shùxué", "meaning": "수학"}, {"hanzi": "司机", "pinyin": "sījī", "meaning": "운전사, 기사"}, {"hanzi": "虽然", "pinyin": "suīrán", "meaning": "비록~하지만"}, {"hanzi": "太阳", "pinyin": "tàiyáng", "meaning": "태양"}, {"hanzi": "糖", "pinyin": "táng", "meaning": "사탕"}, {"hanzi": "特别", "pinyin": "tèbié", "meaning": "특별히"}, {"hanzi": "疼", "pinyin": "téng", "meaning": "아프다"}, {"hanzi": "甜", "pinyin": "tián", "meaning": "달다"}, {"hanzi": "条", "pinyin": "tiáo", "meaning": "가늘고 긴 것"}, {"hanzi": "提高", "pinyin": "tígāo", "meaning": "향상시키다"}, {"hanzi": "体育", "pinyin": "tǐyù", "meaning": "체육"}, {"hanzi": "同事", "pinyin": "tóngshì", "meaning": "직장동료"}, {"hanzi": "同意", "pinyin": "tóngyì", "meaning": "동의하다"}, {"hanzi": "头发", "pinyin": "tóufa", "meaning": "머리카락"}, {"hanzi": "腿", "pinyin": "tuǐ", "meaning": "다리"}, {"hanzi": "突然", "pinyin": "tūrán", "meaning": "갑자기"}, {"hanzi": "图书馆", "pinyin": "túshūguǎn", "meaning": "도서관"}, {"hanzi": "万", "pinyin": "wàn", "meaning": "만"}, {"hanzi": "碗", "pinyin": "wàn", "meaning": "사발, 공기, 그릇"}, {"hanzi": "完成", "pinyin": "wánchéng", "meaning": "완성하다"}, {"hanzi": "忘记", "pinyin": "wàngjì", "meaning": "(지난 일을) 잊다"}, {"hanzi": "为", "pinyin": "wèi", "meaning": "~을 위하여"}, {"hanzi": "位", "pinyin": "wèi", "meaning": "자리, 위치"}, {"hanzi": "为了", "pinyin": "wèile", "meaning": "~을 위하여"}, {"hanzi": "文化", "pinyin": "wénhuà", "meaning": "문화"}, {"hanzi": "西", "pinyin": "xī", "meaning": "서쪽"}, {"hanzi": "夏", "pinyin": "xià", "meaning": "여름"}, {"hanzi": "先", "pinyin": "xiān", "meaning": "먼저"}, {"hanzi": "像", "pinyin": "xiàng", "meaning": "닮다, 비슷하다"}, {"hanzi": "香蕉", "pinyin": "xiāngjiāo", "meaning": "바나나"}, {"hanzi": "相同", "pinyin": "xiāngtóng", "meaning": "서로 같다"}, {"hanzi": "相信", "pinyin": "xiāngxìn", "meaning": "믿다, 신임하다"}, {"hanzi": "小心", "pinyin": "xiǎoxīn", "meaning": "조심하다"}, {"hanzi": "校长", "pinyin": "xiàozhǎng", "meaning": "교장"}, {"hanzi": "鞋", "pinyin": "xié", "meaning": "신발"}, {"hanzi": "习惯", "pinyin": "xíguàn", "meaning": "습관 /(동)습관되다"}, {"hanzi": "信", "pinyin": "xìn", "meaning": "편지"}, {"hanzi": "行李箱", "pinyin": "xínglǐxiāng", "meaning": "짐가방, 트렁크"}, {"hanzi": "兴趣", "pinyin": "xìngqù", "meaning": "흥미"}, {"hanzi": "新闻", "pinyin": "xīnwén", "meaning": "뉴스"}, {"hanzi": "新鲜", "pinyin": "xīnxiān", "meaning": "신선하다, 싱싱하다"}, {"hanzi": "熊猫", "pinyin": "xióngmāo", "meaning": "판다"}, {"hanzi": "洗手间", "pinyin": "xǐshǒujiān", "meaning": "화장실"}, {"hanzi": "洗澡", "pinyin": "xǐzǎo", "meaning": "목욕하다"}, {"hanzi": "选择", "pinyin": "xuǎnzé", "meaning": "고르다, 선택하다"}, {"hanzi": "需要", "pinyin": "xūyào", "meaning": "필요하다 /(명)요구"}, {"hanzi": "眼镜", "pinyin": "yǎnjìng", "meaning": "안경"}, {"hanzi": "要求", "pinyin": "yāoqiú", "meaning": "요구하다"}, {"hanzi": "爷爷", "pinyin": "yéye", "meaning": "할아버지"}, {"hanzi": "一般", "pinyin": "yìbān", "meaning": "일반적이다\n/(부)일반적으로"}, {"hanzi": "一边", "pinyin": "yìbiān", "meaning": "~하면서~하다"}, {"hanzi": "一定", "pinyin": "yídìng", "meaning": "반드시"}, {"hanzi": "一共", "pinyin": "yígòng", "meaning": "전부, 합계"}, {"hanzi": "以后", "pinyin": "yǐhòu", "meaning": "이후"}, {"hanzi": "一会儿", "pinyin": "yíhuìr", "meaning": "잠시동안, 잠시"}, {"hanzi": "应该", "pinyin": "yīnggāi", "meaning": "~해야한다"}, {"hanzi": "影响", "pinyin": "yǐngxiǎng", "meaning": "영향을 끼치다"}, {"hanzi": "银行", "pinyin": "yínháng", "meaning": "은행"}, {"hanzi": "音乐", "pinyin": "yīnyuè", "meaning": "음악"}, {"hanzi": "以前", "pinyin": "yǐqián", "meaning": "이전, 예전"}, {"hanzi": "以为", "pinyin": "yǐwéi", "meaning": "~인 줄 알다"}, {"hanzi": "一样", "pinyin": "yíyàng", "meaning": "같다"}, {"hanzi": "一直", "pinyin": "yìzhí", "meaning": "줄곧, 계속"}, {"hanzi": "用", "pinyin": "yòng", "meaning": "사용하다, 쓰다"}, {"hanzi": "又", "pinyin": "yòu", "meaning": "또, 다시"}, {"hanzi": "有名", "pinyin": "yǒumíng", "meaning": "유명하다"}, {"hanzi": "游戏", "pinyin": "yóuxì", "meaning": "게임"}, {"hanzi": "愿意", "pinyin": "yuànyì", "meaning": "원하다, 동의하다"}, {"hanzi": "遇到", "pinyin": "yùdào", "meaning": "만나다, 마주치다"}, {"hanzi": "越", "pinyin": "yuè", "meaning": "~할수록"}, {"hanzi": "月亮", "pinyin": "yuèliang", "meaning": "달다"}, {"hanzi": "云", "pinyin": "yún", "meaning": "구름"}, {"hanzi": "站", "pinyin": "zhàn", "meaning": "서다 /(명)정거장"}, {"hanzi": "照顾", "pinyin": "zhàogù", "meaning": "보살피다, 돌보다"}, {"hanzi": "着急", "pinyin": "zháojí", "meaning": "조급해하다"}, {"hanzi": "照片", "pinyin": "zhàopiàn", "meaning": "사진"}, {"hanzi": "照相机", "pinyin": "zhàoxiàngjī", "meaning": "카메라"}, {"hanzi": "种", "pinyin": "zhǒng", "meaning": "종류"}, {"hanzi": "中间", "pinyin": "zhōngjiān", "meaning": "중간"}, {"hanzi": "重要", "pinyin": "zhòngyào", "meaning": "중요하다"}, {"hanzi": "终于", "pinyin": "zhōngyú", "meaning": "마침내"}, {"hanzi": "周末", "pinyin": "zhōumò", "meaning": "주말"}, {"hanzi": "祝", "pinyin": "zhù", "meaning": "기원하다, 축하하다"}, {"hanzi": "主要", "pinyin": "zhǔyào", "meaning": "주요하다"}, {"hanzi": "注意", "pinyin": "zhùyì", "meaning": "주의하다, 조심하다"}, {"hanzi": "字典", "pinyin": "zìdiǎn", "meaning": "자전"}, {"hanzi": "自己", "pinyin": "zìjǐ", "meaning": "자기, 자신, 스스로"}, {"hanzi": "总是", "pinyin": "zǒngshì", "meaning": "항상, 늘"}, {"hanzi": "最近", "pinyin": "zuìjìn", "meaning": "최근, 요즘"}, {"hanzi": "作业", "pinyin": "zuòyè", "meaning": "숙제, 과제"}, {"hanzi": "作用", "pinyin": "zuòyòng", "meaning": "작용, 역할"}];
+const HSK2 = [{"hanzi": "吧", "pinyin": "ba", "meaning": "문장 끝에 쓰여, 추측/제안/기대/명령 등의 어기를 나타냄 ex) ~하자!"}, {"hanzi": "白", "pinyin": "bái", "meaning": "하얗다, 밝다"}, {"hanzi": "百", "pinyin": "bǎi", "meaning": "100"}, {"hanzi": "帮助", "pinyin": "bāngzhù", "meaning": "돕다"}, {"hanzi": "报纸", "pinyin": "bàozhǐ", "meaning": "신문"}, {"hanzi": "比", "pinyin": "bǐ", "meaning": "~에 비해, ~보다"}, {"hanzi": "别", "pinyin": "bié", "meaning": "~하지 마라"}, {"hanzi": "宾馆", "pinyin": "bīnguǎn", "meaning": "호텔"}, {"hanzi": "长", "pinyin": "cháng", "meaning": "길다"}, {"hanzi": "唱歌", "pinyin": "chàng gē", "meaning": "노래 부르다"}, {"hanzi": "出", "pinyin": "chū", "meaning": "나가다, 나오다"}, {"hanzi": "穿", "pinyin": "chuān", "meaning": "입다, 신다"}, {"hanzi": "次", "pinyin": "cì", "meaning": "차례, 번, 회"}, {"hanzi": "从", "pinyin": "cóng", "meaning": "~부터"}, {"hanzi": "错", "pinyin": "cuò", "meaning": "틀리다"}, {"hanzi": "打篮球", "pinyin": "dǎ lánqiú", "meaning": "농구를 하다"}, {"hanzi": "大家", "pinyin": "dàjiā", "meaning": "모두"}, {"hanzi": "到", "pinyin": "dào", "meaning": "도착하다, 도달하다"}, {"hanzi": "得", "pinyin": "de", "meaning": "동사나 형용사 뒤에 쓰여 결과나 정도를 나타내는 보어와 연결시킴"}, {"hanzi": "等", "pinyin": "děng", "meaning": "기다리다"}, {"hanzi": "弟弟", "pinyin": "dìdi", "meaning": "남동생"}, {"hanzi": "第一", "pinyin": "dì-yī", "meaning": "제1"}, {"hanzi": "懂", "pinyin": "dǒng", "meaning": "알다, 이해하다"}, {"hanzi": "对", "pinyin": "duì", "meaning": "맞다, 옳다, ~에게, ~에 대하여"}, {"hanzi": "房间", "pinyin": "fángjiān", "meaning": "방"}, {"hanzi": "非常", "pinyin": "fēicháng", "meaning": "매우, 대단히"}, {"hanzi": "服务员", "pinyin": "fúwùyuán", "meaning": "종업원"}, {"hanzi": "高", "pinyin": "gāo", "meaning": "높다, (키가)크다"}, {"hanzi": "告诉", "pinyin": "gàosu", "meaning": "말하다, 알리다"}, {"hanzi": "哥哥", "pinyin": "gēge", "meaning": "형, 오빠"}, {"hanzi": "给", "pinyin": "gěi", "meaning": "~에게 ~을 주다"}, {"hanzi": "公共汽车", "pinyin": "gōnggòng qìchē", "meaning": "버스"}, {"hanzi": "公司", "pinyin": "gōngsī", "meaning": "회사"}, {"hanzi": "贵", "pinyin": "guì", "meaning": "비싸다"}, {"hanzi": "过", "pinyin": "guo", "meaning": "동사 뒤에 쓰여 경험을 나타냄 ex) 去过吗？：가본적 있니?"}, {"hanzi": "还", "pinyin": "hái", "meaning": "여전히, 아직도"}, {"hanzi": "孩子", "pinyin": "háizi", "meaning": "어린아이, 자녀"}, {"hanzi": "好吃", "pinyin": "hǎochī", "meaning": "맛있다"}, {"hanzi": "黑", "pinyin": "hēi", "meaning": "어둡다, 까맣다"}, {"hanzi": "红", "pinyin": "hóng", "meaning": "붉다, 빨갛다"}, {"hanzi": "火车站", "pinyin": "huǒchēzhàn", "meaning": "기차역"}, {"hanzi": "机场", "pinyin": "jīchǎng", "meaning": "공항"}, {"hanzi": "鸡蛋", "pinyin": "jīdàn", "meaning": "계란, 달걀"}, {"hanzi": "件", "pinyin": "jiàn", "meaning": "건, 개, 벌 (물건/셔츠/사건 등을 세는 단위)"}, {"hanzi": "教室", "pinyin": "jiàoshì", "meaning": "교실"}, {"hanzi": "姐姐", "pinyin": "jiějie", "meaning": "누나, 언니"}, {"hanzi": "介绍", "pinyin": "jièshào", "meaning": "소개하다"}, {"hanzi": "进", "pinyin": "jìn", "meaning": "(밖에서 안으로) 들다, 나아가다"}, {"hanzi": "近", "pinyin": "jìn", "meaning": "가깝다"}, {"hanzi": "就", "pinyin": "jiù", "meaning": "곧, 바로"}, {"hanzi": "觉得", "pinyin": "juéde", "meaning": "~라고 생각하다"}, {"hanzi": "咖啡", "pinyin": "kāfēi", "meaning": "커피"}, {"hanzi": "开始", "pinyin": "kāishǐ", "meaning": "시작되다, 개시하다"}, {"hanzi": "考试", "pinyin": "kǎoshì", "meaning": "시험을 치다"}, {"hanzi": "可能", "pinyin": "kěnéng", "meaning": "~일지도 모른다"}, {"hanzi": "可以", "pinyin": "kěyǐ", "meaning": "~할 수 있다"}, {"hanzi": "课", "pinyin": "kè", "meaning": "수업, 강의"}, {"hanzi": "快", "pinyin": "kuài", "meaning": "빠르다"}, {"hanzi": "快乐", "pinyin": "kuàilè", "meaning": "즐겁다, 행복하다"}, {"hanzi": "累", "pinyin": "lèi", "meaning": "지치다, 피곤하다"}, {"hanzi": "离", "pinyin": "lí", "meaning": "분리하다, 갈라지다"}, {"hanzi": "两", "pinyin": "liǎng", "meaning": "2, 둘"}, {"hanzi": "零", "pinyin": "líng", "meaning": "0"}, {"hanzi": "路", "pinyin": "lù", "meaning": "길, 도로"}, {"hanzi": "旅游", "pinyin": "lǚyóu", "meaning": "여행하다"}, {"hanzi": "卖", "pinyin": "mài", "meaning": "팔다"}, {"hanzi": "慢", "pinyin": "màn", "meaning": "느리다"}, {"hanzi": "忙", "pinyin": "máng", "meaning": "바쁘다"}, {"hanzi": "每", "pinyin": "měi", "meaning": "매, 각, ~마다"}, {"hanzi": "妹妹", "pinyin": "mèimei", "meaning": "여동생"}, {"hanzi": "门", "pinyin": "mén", "meaning": "문"}, {"hanzi": "面条儿", "pinyin": "miàntiáor", "meaning": "국수"}, {"hanzi": "男", "pinyin": "nán", "meaning": "남자"}, {"hanzi": "您", "pinyin": "nín", "meaning": "당신"}, {"hanzi": "牛奶", "pinyin": "niúnǎi", "meaning": "우유"}, {"hanzi": "女", "pinyin": "nǚ", "meaning": "여자"}, {"hanzi": "旁边", "pinyin": "pángbiān", "meaning": "옆, 근처"}, {"hanzi": "跑步", "pinyin": "pǎo bù", "meaning": "달리다"}, {"hanzi": "便宜", "pinyin": "piányi", "meaning": "싸다"}, {"hanzi": "票", "pinyin": "piào", "meaning": "표"}, {"hanzi": "妻子", "pinyin": "qīzi", "meaning": "아내"}, {"hanzi": "起床", "pinyin": "qǐ chuáng", "meaning": "(잠자리에서) 일어나다"}, {"hanzi": "千", "pinyin": "qiān", "meaning": "1000"}, {"hanzi": "铅笔", "pinyin": "qiānbǐ", "meaning": "연필"}, {"hanzi": "晴", "pinyin": "qíng", "meaning": "하늘이 맑다"}, {"hanzi": "去年", "pinyin": "qùnián", "meaning": "작년"}, {"hanzi": "让", "pinyin": "ràng", "meaning": "~하게 하다, 양보하다"}, {"hanzi": "日", "pinyin": "rì", "meaning": "일(날짜의 단위)"}, {"hanzi": "上班", "pinyin": "shàng bān", "meaning": "출근하다"}, {"hanzi": "身体", "pinyin": "shēntǐ", "meaning": "몸, 신체"}, {"hanzi": "生病", "pinyin": "shēng bìng", "meaning": "병이 나다"}, {"hanzi": "生日", "pinyin": "shēngrì", "meaning": "생일"}, {"hanzi": "时间", "pinyin": "shíjiān", "meaning": "시간"}, {"hanzi": "事情", "pinyin": "shìqing", "meaning": "일, 사건"}, {"hanzi": "手表", "pinyin": "shǒubiǎo", "meaning": "손목시계"}, {"hanzi": "手机", "pinyin": "shǒujī", "meaning": "휴대전화"}, {"hanzi": "说话", "pinyin": "shuō huà", "meaning": "말하다"}, {"hanzi": "送", "pinyin": "sòng", "meaning": "보내다"}, {"hanzi": "虽然~但是~", "pinyin": "suīrán~dànshì~", "meaning": "비록~하지만~하다"}, {"hanzi": "它", "pinyin": "tā", "meaning": "그, 그것"}, {"hanzi": "踢足球", "pinyin": "tī zúqiú", "meaning": "축구를 하다"}, {"hanzi": "题", "pinyin": "tí", "meaning": "문제"}, {"hanzi": "跳舞", "pinyin": "tiào wǔ", "meaning": "춤을 추다"}, {"hanzi": "外", "pinyin": "wài", "meaning": "겉, 바깥"}, {"hanzi": "完", "pinyin": "wán", "meaning": "마치다"}, {"hanzi": "玩", "pinyin": "wán", "meaning": "놀다"}, {"hanzi": "晚上", "pinyin": "wǎnshang", "meaning": "저녁"}, {"hanzi": "往", "pinyin": "wǎng", "meaning": "~쪽으로, ~을 향해"}, {"hanzi": "为什么", "pinyin": "wèi shénme", "meaning": "왜, 어째서"}, {"hanzi": "问", "pinyin": "wèn", "meaning": "묻다, 질문하다"}, {"hanzi": "问题", "pinyin": "wèntí", "meaning": "문제"}, {"hanzi": "西瓜", "pinyin": "xīguā", "meaning": "수박"}, {"hanzi": "希望", "pinyin": "xīwàng", "meaning": "희망하다, 바라다"}, {"hanzi": "洗", "pinyin": "xǐ", "meaning": "씻다, 빨다"}, {"hanzi": "小时", "pinyin": "xiǎoshí", "meaning": "시간"}, {"hanzi": "笑", "pinyin": "xiào", "meaning": "웃다"}, {"hanzi": "新", "pinyin": "xīn", "meaning": "새롭다"}, {"hanzi": "姓", "pinyin": "xìng", "meaning": "성씨가~이다"}, {"hanzi": "休息", "pinyin": "xiūxi", "meaning": "휴식하다, 쉬다"}, {"hanzi": "雪", "pinyin": "xuě", "meaning": "눈(snow)"}, {"hanzi": "颜色", "pinyin": "yánsè", "meaning": "색, 색깔"}, {"hanzi": "眼睛", "pinyin": "yǎnjing", "meaning": "눈(eyes)"}, {"hanzi": "羊肉", "pinyin": "yángròu", "meaning": "양고기"}, {"hanzi": "药", "pinyin": "yào", "meaning": "약, 약물"}, {"hanzi": "要", "pinyin": "yào", "meaning": "~할 것이다."}, {"hanzi": "也", "pinyin": "yě", "meaning": "~도, 역시"}, {"hanzi": "一起", "pinyin": "yìqǐ", "meaning": "같이"}, {"hanzi": "一下", "pinyin": "yíxià", "meaning": "한 번 ~해보다"}, {"hanzi": "已经", "pinyin": "yǐjīng", "meaning": "이미, 벌써"}, {"hanzi": "意思", "pinyin": "yìsi", "meaning": "의미, 뜻"}, {"hanzi": "因为~所以~", "pinyin": "yīnwèi~suǒyǐ~", "meaning": "~하기 때문에 ~하다"}, {"hanzi": "阴", "pinyin": "yīn", "meaning": "흐리다"}, {"hanzi": "游泳", "pinyin": "yóuyǒng", "meaning": "수영하다"}, {"hanzi": "右边", "pinyin": "yòubiān", "meaning": "오른쪽"}, {"hanzi": "鱼", "pinyin": "yú", "meaning": "물고기"}, {"hanzi": "远", "pinyin": "yuǎn", "meaning": "멀다"}, {"hanzi": "运动", "pinyin": "yùndòng", "meaning": "운동하다"}, {"hanzi": "再", "pinyin": "zài", "meaning": "다시"}, {"hanzi": "早上", "pinyin": "zǎoshang", "meaning": "아침"}, {"hanzi": "丈夫", "pinyin": "zhàngfu", "meaning": "남편"}, {"hanzi": "找", "pinyin": "zhǎo", "meaning": "찾다, 구하다"}, {"hanzi": "着", "pinyin": "zhe", "meaning": "동사 뒤에 쓰여 진행을 나타냄"}, {"hanzi": "真", "pinyin": "zhēn", "meaning": "참으로, 진실로"}, {"hanzi": "正在", "pinyin": "zhèngzài", "meaning": "지금 ~하고 있는 중이다"}, {"hanzi": "只", "pinyin": "zhī", "meaning": "마리, 쪽, 짝 (짐승을 세거나 쌍으로 이루어진 것 중 하나를 세는 단위)"}, {"hanzi": "知道", "pinyin": "zhīdào", "meaning": "알다, 이해하다"}, {"hanzi": "准备", "pinyin": "zhǔnbèi", "meaning": "준비하다"}, {"hanzi": "走", "pinyin": "zǒu", "meaning": "걷다"}, {"hanzi": "最", "pinyin": "zuì", "meaning": "가장, 제일"}, {"hanzi": "左边", "pinyin": "zuǒbiān", "meaning": "왼쪽, 좌측"}];
+
+// === AUDIO TTS (Google Translate - works for ALL words) ===
+let audioEl=null;
+function speakWord(text){
+  const w=text||cW[cIdx].hanzi;
+  if(audioEl){audioEl.pause();audioEl=null;}
+  audioEl=new Audio('https://translate.google.com/translate_tts?ie=UTF-8&client=tw-ob&tl=zh-CN&q='+encodeURIComponent(w));
+  audioEl.playbackRate=1.5;
+  audioEl.play().catch(()=>{});
+}
+
+// === STUDY LOG ===
+function getLog(){try{return JSON.parse(localStorage.getItem('hsk_log')||'{}');}catch(e){return {};}}
+function saveLog(log){localStorage.setItem('hsk_log',JSON.stringify(log));}
+function logStudy(lv,dy){
+  const log=getLog();
+  const today=new Date().toISOString().slice(0,10);
+  if(!log[today])log[today]=[];
+  const dn=(lv===1?0:lv===2?15:0)+dy;
+  const entry='HSK'+lv+'-Day'+dn;
+  if(!log[today].includes(entry))log[today].push(entry);
+  saveLog(log);
+}
+function unlogStudy(lv,dy){
+  const log=getLog();
+  const dn=(lv===1?0:lv===2?15:0)+dy;
+  const entry='HSK'+lv+'-Day'+dn;
+  // 모든 날짜에서 해당 entry 제거
+  Object.keys(log).forEach(date=>{
+    log[date]=log[date].filter(e=>e!==entry);
+    if(log[date].length===0)delete log[date];
+  });
+  saveLog(log);
+  showDays(lv);
+}
+
+// === NAV ===
+let cLv=0,cDy=0,cIdx=0,cW=[];
+function switchTab(tab){
+  document.querySelectorAll('.nav-tab').forEach(t=>t.classList.remove('on'));
+  if(tab==='study'){
+    document.querySelectorAll('.nav-tab')[0].classList.add('on');
+    document.getElementById('calView').style.display='none';
+    document.getElementById('homeView').style.display='block';
+    document.getElementById('daysView').style.display='none';
+    document.getElementById('studyView').style.display='none';
+  }else{
+    document.querySelectorAll('.nav-tab')[1].classList.add('on');
+    document.getElementById('homeView').style.display='none';
+    document.getElementById('daysView').style.display='none';
+    document.getElementById('studyView').style.display='none';
+    document.getElementById('calView').style.display='block';
+    renderCal();renderReview();
+  }
+}
+function goHome(){
+  document.getElementById('homeView').style.display='block';
+  document.getElementById('daysView').style.display='none';
+  document.getElementById('studyView').style.display='none';
+}
+function showDays(lv){
+  cLv=lv;
+  document.getElementById('homeView').style.display='none';
+  document.getElementById('daysView').style.display='block';
+  document.getElementById('studyView').style.display='none';
+  const off=lv===1?0:lv===2?15:0;
+  const daysCount=lv===3?21:15;
+  const wordsPerDay=lv===3?15:10;
+  document.getElementById('dTitle').textContent='HSK '+lv+'급 단어장';
+  document.getElementById('dSub').textContent=lv===3?'하루 15단어 × 21일 = 310단어':'하루 10단어 × 15일 = 150단어';
+  const log=getLog();const allE=Object.values(log).flat();
+  let h='';
+  for(let d=1;d<=daysCount;d++){
+    const wpd=wordsPerDay;
+    const dn=off+d,s=(d-1)*wpd+1,e=d*wpd;
+    const done=allE.includes('HSK'+lv+'-Day'+dn);
+    h+='<div class="dy" onclick="showStudy('+lv+','+d+')" style="animation:fu .35s ease both;animation-delay:'+(d*0.03)+'s">'+(done?'<div class="dy-done" onclick="event.stopPropagation();unlogStudy('+lv+','+d+')" title="클릭하면 학습 취소">✅</div>':'')+'<div class="dy-num">Day '+dn+'</div><div class="dy-label">'+d+'일차</div><div class="dy-range">#'+s+' ~ #'+e+'</div></div>';
+  }
+  document.getElementById('dGrid').innerHTML=h;
+}
+function backDays(){showDays(cLv);}
+function showStudy(lv,dy){
+  cLv=lv;cDy=dy;cIdx=0;
+  const src=lv===1?HSK1:lv===2?HSK2:HSK3;
+  const wpd2=lv===3?15:10;
+  cW=src.slice((dy-1)*wpd2,(dy-1)*wpd2+wpd2);
+  const dn=(lv===1?0:lv===2?15:0)+dy;
+  document.getElementById('homeView').style.display='none';
+  document.getElementById('daysView').style.display='none';
+  document.getElementById('studyView').style.display='block';
+  document.getElementById('sTitle').textContent='Day '+dn+' — HSK '+lv+'급';
+  document.getElementById('sCnt').textContent=cW.length+'개 단어';
+  logStudy(lv,dy);
+  renderPips();renderCard();renderList();
+}
+
+// === FLASHCARD ===
+function renderPips(){document.getElementById('pips').innerHTML=cW.map((_,i)=>'<div class="pip'+(i===cIdx?' on':'')+'"></div>').join('');}
+function renderCard(){
+  const w=cW[cIdx];
+  document.getElementById('fc').classList.remove('flip');
+  document.getElementById('fPy').textContent=w.pinyin;
+  document.getElementById('fHz').textContent=w.hanzi;
+  document.getElementById('fMn').textContent=w.meaning;
+  const idx=(cIdx+1)+'/'+cW.length;
+  document.getElementById('fIdx').textContent=idx;
+  document.getElementById('fIdx2').textContent=idx;
+  document.getElementById('cProg').textContent=(cIdx+1)+' / '+cW.length;
+  document.getElementById('pBtn').disabled=cIdx===0;
+  document.getElementById('nBtn').disabled=cIdx===cW.length-1;
+  renderPips();
+  setTimeout(()=>speakWord(w.hanzi),100);
+}
+function flipCard(){document.getElementById('fc').classList.toggle('flip');}
+function prev(){if(cIdx>0){cIdx--;renderCard();}}
+function nxt(){if(cIdx<cW.length-1){cIdx++;renderCard();}}
+function renderList(){
+  document.getElementById('wList').innerHTML=cW.map((w,i)=>'<div class="wi"><div class="wi-idx">'+(i+1)+'</div><div onclick="jump('+i+')" style="cursor:pointer"><div class="wi-hz">'+w.hanzi+'</div><div class="wi-py">'+w.pinyin+'</div></div><div class="wi-mn">'+w.meaning+'</div><div class="wi-spk" onclick="speakWord(\''+w.hanzi.replace(/'/g,"\'")+'\')">🔊</div></div>').join('');
+}
+function jump(i){cIdx=i;setMode('card',document.querySelectorAll('.md-btn')[0]);renderCard();}
+function setMode(m,el){
+  document.querySelectorAll('.md-btn').forEach(b=>b.classList.remove('on'));el.classList.add('on');
+  document.getElementById('cardZone').style.display=m==='card'?'flex':'none';
+  document.getElementById('wList').style.display=m==='list'?'block':'none';
+}
+
+// === CALENDAR ===
+let calY,calM;
+(function(){const n=new Date();calY=n.getFullYear();calM=n.getMonth();})();
+function calPrev(){calM--;if(calM<0){calM=11;calY--;}renderCal();}
+function calNext(){calM++;if(calM>11){calM=0;calY++;}renderCal();}
+function renderCal(){
+  const mn=['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'];
+  document.getElementById('calMonth').textContent=calY+'년 '+mn[calM];
+  const dn=['일','월','화','수','목','금','토'];
+  const first=new Date(calY,calM,1);
+  const lastD=new Date(calY,calM+1,0).getDate();
+  const startD=first.getDay();
+  const today=new Date();const todayS=today.toISOString().slice(0,10);
+  const log=getLog();
+  let html=dn.map(d=>'<div class="cal-hdr">'+d+'</div>').join('');
+  for(let i=0;i<startD;i++)html+='<div class="cal-day empty"></div>';
+  for(let d=1;d<=lastD;d++){
+    const ds=calY+'-'+String(calM+1).padStart(2,'0')+'-'+String(d).padStart(2,'0');
+    const isToday=ds===todayS;
+    const isFuture=new Date(ds)>today&&!isToday;
+    const entries=log[ds]||[];
+    const hasStudy=entries.length>0;
+    let cls='cal-day';
+    if(isToday)cls+=' today';
+    if(hasStudy)cls+=' done';
+    else if(isFuture)cls+=' future';
+    else if(!isToday)cls+=' missed';
+    html+='<div class="'+cls+'" '+(hasStudy?'onclick="showCalDet(\''+ds+'\')"':'')+'>'+d+'</div>';
+  }
+  document.getElementById('calGrid').innerHTML=html;
+  document.getElementById('calDetail').style.display='none';
+}
+function showCalDet(ds){
+  const log=getLog();const entries=log[ds]||[];if(!entries.length)return;
+  const p=ds.split('-');
+  document.getElementById('calDetTitle').textContent='';
+  document.getElementById('calDetBody').innerHTML=entries.map(e=>'<div class="cal-det-tag">'+e+'</div>').join('');
+  document.getElementById('calDetail').style.display='block';
+}
+
+// === REVIEW REMINDERS ===
+function renderReview(){
+  const log=getLog();
+  const today=new Date();
+  const offsets=[{d:1,l:'어제'},{d:3,l:'3일 전'},{d:7,l:'7일 전'},{d:14,l:'2주 전'},{d:30,l:'한달 전'}];
+  let html='';
+  let hasAny=false;
+  offsets.forEach(o=>{
+    const dt=new Date(today);dt.setDate(dt.getDate()-o.d);
+    const ds=dt.toISOString().slice(0,10);
+    const entries=log[ds]||[];
+    if(entries.length>0){
+      hasAny=true;
+      html+='<div class="rv-item"><div class="rv-left"><div class="rv-when">'+o.l+'</div><div class="rv-tags">'+entries.map(e=>{
+        // Parse entry like "1급-3" to navigate
+        const m=e.match(/(\d)급-(\d+)/);
+        if(m){const lv=parseInt(m[1]),dn=parseInt(m[2]),dy=lv===1?dn:lv===2?dn-15:dn;
+          return '<div class="rv-tag" onclick="switchTab(\'study\');showDays('+lv+');setTimeout(()=>showStudy('+lv+','+dy+'),100)">'+e+'</div>';
+        }return '<div class="rv-tag">'+e+'</div>';
+      }).join('')+'</div></div></div>';
+    }
+  });
+  if(!hasAny)html='<div class="rv-empty">아직 학습 기록이 없어요. 단어장부터 시작해보세요!</div>';
+  document.getElementById('rvList').innerHTML=html;
+}
+
+// === KEYBOARD & TOUCH ===
+document.addEventListener('keydown',e=>{
+  if(document.getElementById('studyView').style.display==='none')return;
+  if(e.key==='ArrowLeft')prev();if(e.key==='ArrowRight')nxt();
+  if(e.key===' '||e.key==='Enter'){e.preventDefault();flipCard();}
+});
+let tx=0;
+document.addEventListener('touchstart',e=>{tx=e.touches[0].clientX;},{passive:true});
+document.addEventListener('touchend',e=>{
+  if(document.getElementById('studyView').style.display==='none')return;
+  const diff=e.changedTouches[0].clientX-tx;
+  if(Math.abs(diff)>60){diff>0?prev():nxt();}
+});
+</script>
+</body>
+</html>
